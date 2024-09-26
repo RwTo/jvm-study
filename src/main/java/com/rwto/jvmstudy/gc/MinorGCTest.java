@@ -68,5 +68,6 @@ public class MinorGCTest {
  * 空间分配担保
  * 在MinorGC之前，JVM会检查老年代最大可用的连续空间 是否大于新生代所有对象的总空间，或者历次晋升的平均大小
  * 如果成立，则进行Minor GC，如果不成立，则进行Full GC
- *
+ * JDK6 Update24之后的规则变为只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行Minor GC，否则将进行Full GC。
+ * HandlePromotionFailure 被废除
  * */

@@ -15,7 +15,7 @@ public class DynamicObjectToOldGenTest {
      * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+UseSerialGC -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=15 -XX:+PrintTenuringDistribution
      * 参数解释：{@link LongTimeObjectToOldGenTest}
      */
-
+    //private static byte[] allocation =  new byte[_1MB * 1];静态对象也存在堆内存中
     public static void main(String[] args) {
         /**IDEA启动初始Eden区占用3M*/
         byte[] allocation1, allocation2, allocation3, allocation4;
@@ -42,7 +42,8 @@ public class DynamicObjectToOldGenTest {
          * */
         allocation4 = new byte[4 * _1MB];
         System.out.println("allocation4 4M");
-        allocation4 = null;
+        /*这里必须取消刚刚引用的4M对象，因为 接下来申请对象之前，这个对象经可达性分析是有效的，不会被丢弃*/
+        //allocation4 = null;
 
         /**
          * Eden区申请一个4M的内存空间，申请失败
